@@ -9,12 +9,15 @@ package actividad005;
  * @author SARIC
  */
 public class JFrame extends javax.swing.JFrame {
+    Lista milista;
 
     /**
      * Creates new form JFrame
      */
     public JFrame() {
         initComponents();
+        milista = new Lista();
+        milista.setLlenarJTable(jTable1);
     }
 
     /**
@@ -204,6 +207,7 @@ public class JFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

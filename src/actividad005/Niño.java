@@ -10,15 +10,16 @@ import javax.swing.JOptionPane;
  */
 public class Niño {
 
-   
-     String registroCivil;
+   String municipio;
+    String registroCivil;
     String nombre;
     double talla;
     double peso;
     int edad;
     Representante representante;
 
-    public Niño(String registroCivil, String nombre, double talla, double peso, int edad, Representante representante) {
+    public Niño(String municipio, String registroCivil, String nombre, double talla, double peso, int edad, Representante representante) {
+        this.municipio= municipio;
         this.registroCivil = registroCivil;
         this.nombre = nombre;
         this.talla = talla;
@@ -26,6 +27,15 @@ public class Niño {
         this.edad = edad;
         this.representante = representante;
     }
+
+    public String getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(String municipio) {
+        this.municipio = municipio;
+    }
+    
 
     public String getRegistroCivil() {
         return registroCivil;
@@ -75,17 +85,28 @@ public class Niño {
         this.representante = representante;
     }
 
-   
-
-         public void mostrarInfo() {
-        JOptionPane.showMessageDialog(null, "Información del Niño:" +
+   public String mostrarDatos() {
+             String msg= "Información del Niño:" +
                 "Registro Civil: " + registroCivil + "\n" +
                 "Nombre del niño: " + nombre + "\n" +
                 "Talla: " + talla + " m\n" +
                 "Peso: " + peso + " kg\n" +
-                 "Edad: " + edad + " años" +
-                "Representante: " + representante.getNombre() + 
-                " (ID: " + representante.getIdentificacion() + ")");
+                 "Edad: " + edad + " años\n" +
+                "Representante: " + representante.getNombre() +"\n" + 
+                        "ID: " + representante.getIdentificacion();
+        return msg;
+    }
+
+         public void mostrarInfo() {
+             String msg= "Información del Niño:" +
+                "Registro Civil: " + registroCivil + "\n" +
+                "Nombre del niño: " + nombre + "\n" +
+                "Talla: " + talla + " m\n" +
+                "Peso: " + peso + " kg\n" +
+                 "Edad: " + edad + " años\n" +
+                "Representante: " + representante.getNombre() +"\n" + 
+                        "ID: " + representante.getIdentificacion();
+        JOptionPane.showMessageDialog(null,msg );
     }
         
     }

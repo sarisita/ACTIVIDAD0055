@@ -45,6 +45,22 @@ public class Lista {
         }
         JOptionPane.showMessageDialog(null, "Niño agregado al inicio de la lista.");
     }
+  public void AddMedio(Niño niño, String registroCivilAnterior, String registroCivilSiguiente) {
+       
+        while (cab != null && (!cab.niño.registroCivil.equals(registroCivilAnterior) || 
+                                   (cab.siguiente != null && !cab.siguiente.niño.registroCivil.equals(registroCivilSiguiente)))) {
+            cab = cab.siguiente;
+        }
+        if (cab != null && cab.siguiente != null) {
+            Nodo nuevo = new Nodo(niño);
+            Nodo siguiente = cab.siguiente;
+            cab.siguiente = nuevo;
+            nuevo.anterior = cab;
+            nuevo.siguiente = siguiente;
+            siguiente.anterior = nuevo;
+        }
+        JOptionPane.showMessageDialog(null, "Niño agregado en medio de la lista.");
+    }
     
 
         public void AddFinal(Niño niño) {
@@ -61,6 +77,17 @@ public class Lista {
         }
         JOptionPane.showMessageDialog(null, "Niño agregado al final de la lista.");
         }
+        public Nodo getUltimo() {
+        if (cab == null) {
+            return null;
+        } else {
+            Nodo p = cab;
+            while (p.siguiente != null) {
+                p = p.siguiente;
+            }
+            return p;
+        }
+    }
         
          public Nodo getBuscarregistro(String re){
         if(getEsVacia())
@@ -112,16 +139,50 @@ public class Lista {
         }
     }
  public int contarNinosBajosDeTalla() {
-        Nodo actual = cab;
+        Nodo actual = getUltimo();
         int contador = 0;
         while (actual != null) {
             if (actual.niño.getTalla() < 1.0 && actual.niño.getEdad() >= 4 && actual.niño.getEdad() <= 6) {
                 contador++;
             }
-            actual = actual.siguiente;
+            actual = actual.anterior;
         }
         return contador;
     }
+ public void niñosBajosDePeso() {
+        Nodo actual = cab;
+        while (actual != null) {
+            if (actual.niño.edad >= 2 && actual.niño.edad <= 3 && actual.niño.peso < 15) {
+                JOptionPane.showMessageDialog(null, actual.niño.mostrarDatos());
+            }
+            actual = actual.siguiente;
+        }
+    }
+ public void mostrarNiñosPorMunicipio(){
+      if (cab == null) {
+        JOptionPane.showMessageDialog(null, "Lista vacía, no hay niños por minicipop para mostrar.");
+      } else {
+        Nodo actual = getUltimo();
+     int contadorM=0;
+     int contadorS=0;
+     int contadorL=0;
+     String msgM="";
+     String msgS="";
+     String msgL="";
+     while (actual != null){
+     if (actual.niño.municipio.equalsIgnoreCase("Monteria")) {
+                contadorM ++;
+                        msgM+=actual.niño.mostrarDatos();
+            } else if (actual.niño.municipio.equalsIgnoreCase("Sahagun"))
+            { contadorS ++;
+             msgS+=actual.niño.mostrarDatos();
+            } else contadorL++;
+                     msgL+=actual.niño.mostrarDatos();
+     }
+     JOptionPane.showMessageDialog(null,"Niños registrados en Monteria ("+contadorM+") "+msgM);
+     JOptionPane.showMessageDialog(null,"Niños registrados en Sahagun ("+contadorS+") "+msgS);
+     JOptionPane.showMessageDialog(null,"Niños registrados en Lorica ("+contadorL+") "+msgL);
+ } }
  
  public void eliminarNiñoYRep(String re) {
     if (cab == null) {
